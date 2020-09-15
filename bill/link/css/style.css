@@ -1,0 +1,396 @@
+.search2 {
+  background: #fff;
+  padding: 12px 16px 12px 48px;
+  position: relative;
+  display: table;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px -1px rgba(18, 22, 33, 0.3);
+  transition: background .1s ease, padding .5s ease .1s, -webkit-transform .1s ease;
+  transition: background .1s ease, transform .1s ease, padding .5s ease .1s;
+  transition: background .1s ease, transform .1s ease, padding .5s ease .1s, -webkit-transform .1s ease;
+}
+.search2 .bar2 {
+  position: absolute;
+  left: 16px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+.search2 .bar2 span {
+  display: block;
+  color: #fff;
+  position: absolute;
+  left: 12px;
+  top: 0;
+  line-height: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  opacity: 0;
+  right: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.search2 .bar2:before {
+  content: '';
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 16px;
+  border-radius: 16px 0 0 16px;
+  background: #5628EE;
+  opacity: 0;
+}
+.search2 .bar2 .icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  background: #5628EE;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  transition: background .1s ease, -webkit-transform .4s ease 0s;
+  transition: transform .4s ease 0s, background .1s ease;
+  transition: transform .4s ease 0s, background .1s ease, -webkit-transform .4s ease 0s;
+}
+.search2 .bar2 .icon:before, .search2 .bar2 .icon:after {
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 50%;
+}
+.search2 .bar2 .icon:before {
+  background: #fff;
+  left: 4px;
+  top: 4px;
+  right: 4px;
+  bottom: 4px;
+  z-index: 2;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  transition: background .1s ease;
+}
+.search2 .bar2 .icon:after {
+  background: #5628EE;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  transition: background .1s ease;
+}
+.search2 .bar2 .icon i {
+  left: 75%;
+  top: 84%;
+  position: absolute;
+  display: block;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+}
+.search2 .bar2 .icon i:before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: #5628EE;
+  display: block;
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+  transition: background .1s ease, -webkit-transform .4s ease 0s;
+  transition: transform .4s ease 0s, background .1s ease;
+  transition: transform .4s ease 0s, background .1s ease, -webkit-transform .4s ease 0s;
+}
+.search2 form {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.search2 form input,
+.search2 form span {
+  white-space: pre;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 8px 16px 8px 12px;
+  display: block;
+  line-height: 22px;
+  font-weight: 500;
+}
+.search2 form input {
+  color: #8C6FF0;
+  caret-color: #8C6FF0;
+  border: 0;
+  background: 0;
+  outline: none;
+  transition: color .1s ease;
+}
+.search2 form span {
+  display: none;
+}
+.search2 .close2 {
+  border-radius: 50%;
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  background: #E4ECFA;
+  top: 19px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate(-8px, 0);
+          transform: translate(-8px, 0);
+  transition: opacity .3s ease 0s, visibility .3s ease 0s, -webkit-transform .3s ease 0s;
+  transition: transform .3s ease 0s, opacity .3s ease 0s, visibility .3s ease 0s;
+  transition: transform .3s ease 0s, opacity .3s ease 0s, visibility .3s ease 0s, -webkit-transform .3s ease 0s;
+}
+.search2 .close2:before, .search2 .close2:after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  border-radius: 1px;
+  height: 10px;
+  background: #6C7486;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transition: background .3s ease;
+}
+.search2 .close2:before {
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
+}
+.search2 .close2:after {
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
+}
+.search2 ul {
+  overflow: hidden;
+  margin: 0;
+  padding: 8px 0 24px 0;
+  list-style: none;
+  position: absolute;
+  left: 16px;
+  top: 62px;
+  white-space: nowrap;
+}
+.search2 ul.show li {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.search2 ul.show li:nth-child(1) {
+  transition-delay: 0s;
+}
+.search2 ul.show li:nth-child(2) {
+  transition-delay: .3s;
+}
+.search2 ul li {
+  margin: 0 0 20px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s ease;
+  -webkit-transform: translate(0, -6px);
+          transform: translate(0, -6px);
+}
+.search2 ul li:last-child {
+  margin-bottom: 0;
+}
+.search2 ul li a {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+  padding-left: 36px;
+  padding-right: 24px;
+  position: relative;
+}
+.search2 ul li a img {
+  display: block;
+  left: 0;
+  width: 20px;
+  top: 50%;
+  position: absolute;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+.search2 ul li a img.queble {
+  width: 24px;
+}
+.search2 ul li a h5 {
+  margin: 0;
+  color: #151924;
+  font-size: 12px;
+}
+.search2 ul li a p {
+  margin: 4px 0;
+  color: #6C7486;
+}
+.search2 ul li a span {
+  display: block;
+  font-size: 10px;
+  color: #6C7486;
+  opacity: .6;
+  font-style: italic;
+}
+.search2 ul li:nth-child(1) {
+  transition-delay: .3s;
+}
+.search2 ul li:nth-child(2) {
+  transition-delay: 0s;
+}
+.search2 ul li:hover {
+  transition: -webkit-transform .3s ease 0s;
+  transition: transform .3s ease 0s;
+  transition: transform .3s ease 0s, -webkit-transform .3s ease 0s;
+  -webkit-transform: translate(0, -2px);
+          transform: translate(0, -2px);
+}
+.search2.submit {
+  background: #5628EE;
+  -webkit-transform: scale(0.92);
+          transform: scale(0.92);
+}
+.search2.submit .bar2 .icon {
+  background: #fff;
+}
+.search2.submit .bar2 .icon:before {
+  background: #5628EE;
+}
+.search2.submit .bar2 .icon:after {
+  background: #fff;
+}
+.search2.submit .bar2 .icon i:before {
+  background: #fff;
+}
+.search2.submit form input {
+  color: #fff;
+}
+.search2.prepare .bar2:before {
+  opacity: 1;
+  transition: opacity 0s ease 1.25s;
+}
+.search2.prepare .bar2 .icon {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 50% 50% 0;
+          transform-origin: 50% 50% 0;
+  transition: background .1s ease, -webkit-transform .4s ease .85s, -webkit-transform-origin 0s ease 1.25s;
+  transition: transform .4s ease .85s, transform-origin 0s ease 1.25s, background .1s ease;
+  transition: transform .4s ease .85s, transform-origin 0s ease 1.25s, background .1s ease, -webkit-transform .4s ease .85s, -webkit-transform-origin 0s ease 1.25s;
+}
+.search2.prepare .bar2 .icon i:before {
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  transition: background .1s ease, -webkit-transform .4s ease .4s;
+  transition: transform .4s ease .4s, background .1s ease;
+  transition: transform .4s ease .4s, background .1s ease, -webkit-transform .4s ease .4s;
+}
+.search2.animate .bar2 .icon {
+  -webkit-transform: rotateY(75deg);
+          transform: rotateY(75deg);
+  transition: -webkit-transform .6s ease 0s;
+  transition: transform .6s ease 0s;
+  transition: transform .6s ease 0s, -webkit-transform .6s ease 0s;
+}
+.search2.animate .bar2 span {
+  opacity: 1;
+}
+.search2.done {
+  padding-right: 56px;
+  transition: padding .4s ease;
+}
+.search2.done .bar2 .icon {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  transition: -webkit-transform .7s ease 0s;
+  transition: transform .7s ease 0s;
+  transition: transform .7s ease 0s, -webkit-transform .7s ease 0s;
+}
+.search2.done .close2 {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+  transition: opacity .4s ease .5s, visibility .4s ease .5s, -webkit-transform .4s ease .5s;
+  transition: transform .4s ease .5s, opacity .4s ease .5s, visibility .4s ease .5s;
+  transition: transform .4s ease .5s, opacity .4s ease .5s, visibility .4s ease .5s, -webkit-transform .4s ease .5s;
+}
+.search2.done .close2:hover {
+  background: #8C6FF0;
+  transition: background .3s ease;
+}
+.search2.done .close2:hover:before, .search2.done .close2:hover:after {
+  background: #fff;
+}
+.search2.reset .bar2:before {
+  opacity: 0;
+  transition: opacity 0s ease .4s;
+}
+.search2.reset .bar2 .icon {
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  transition: -webkit-transform .4s ease 0s;
+  transition: transform .4s ease 0s;
+  transition: transform .4s ease 0s, -webkit-transform .4s ease 0s;
+}
+/*
+em {
+  color: #6C7486;
+  font-size: 12px;
+  margin: 24px 0 0 0;
+  display: block;
+  text-align: center;
+  font-style: italic;
+}
+em strong {
+  font-weight: bold;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, Arial;
+  color: #ADAFB6;
+  background: #2F3545;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .dribbble {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+}
+body .dribbble img {
+  display: block;
+  height: 28px;
+}
+*/
