@@ -36,22 +36,39 @@
 <script src="../plugins/iCheck/icheck.min.js"></script>
 <script src="../sweetalert2/sweetalert.min.js" ></script>
 
-
-
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
 
 <!-- Page script -->
 <script>
   $(function () {
 	
     //Date picker
-    $('.datepicker').datepicker({
-      autoclose: true
-    })
+    // $('.datepicker').datepicker({
+    //   autoclose: true,
+    //   minDate: 0
+    // })
 
-     //Timepicker
-     $('.timepicker').timepicker({
-      showInputs: true
-    })
+
+    
+    $(function () {
+    $(".example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+
+
+   //Timepicker
+   $(".timepicker").timepicker({
+      showInputs: false
+    });
   })
 </script>
 

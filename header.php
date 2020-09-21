@@ -1,4 +1,4 @@
-<?php session_start(); include('../dbconnect.php');
+<?php session_start(); include('../dbconnect.php'); require('../customfunction/function.php');
 if(!empty($_SESSION['user_id'])){}
 else
 {
@@ -23,6 +23,8 @@ else
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 		<link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
 		<link rel="stylesheet" href="../plugins/datepicker/datepicker3.css">
+		<!-- daterange picker -->
+		<link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
 		<link rel="stylesheet" href="../plugins/timepicker/bootstrap-timepicker.min.css">
 		<link rel="stylesheet" href="../plugins/iCheck/all.css">
 		<link rel="stylesheet" href="../plugins/select2/select2.min.css">
@@ -39,7 +41,7 @@ else
 			}
 		</style>
 	</head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini fixed">
 <div class="wrapper">
 	<header class="main-header">
 		<a href="" class="logo">

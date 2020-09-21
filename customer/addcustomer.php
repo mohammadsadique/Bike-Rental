@@ -57,13 +57,12 @@ if(isset($_POST['update']))
 <div class="content-wrapper">
 	<section class="content">
 		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 			<div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Add Customer</h3>
             </div>
-            <form role="form">
+            <form role="form" id="formSubmit">
             <div class="box-body">
 			 	<div class="col-md-3">
 					<div class="form-group">
@@ -92,7 +91,7 @@ if(isset($_POST['update']))
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Select Vehicle</label>
-						<select class="form-control" name="vehicle_id">
+						<select class="form-control vehicle_id" name="vehicle_id">
 							<option>Select list</option>
 							<?php	
 							$vv1 = "SELECT * FROM `g_addvehicle` ORDER BY id DESC";
@@ -108,12 +107,7 @@ if(isset($_POST['update']))
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Select Month/Week/Hour</label>
-						<select class="form-control" name="days">
-							<option>Select list</option>
-							<option value="H">Hourly</option>
-							<option value="W">Weekly</option>
-							<option value="M">Monthly</option>
-						</select>
+						<select class="form-control days" name="days">						</select>
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -127,42 +121,69 @@ if(isset($_POST['update']))
 					<label for="exampleInputEmail1">Price ( Per Hour )</label>
 						<input type="text" class="form-control" name="price" placeholder="Price ( Per Hour )" value="<?php if($id != ''){ echo $qq['price']; } ?>">
 					</div>  
-				</div>					
-
+				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>Date Time To Take Vehicle</label>
-						<div class="input-group date">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"></i>
-							</div>
-							<input type="text" class="form-control pull-right datepicker">
-						</div>
+						<label>Date and time range:</label>
 						<div class="input-group">
-							<input type="text" class="form-control timepicker">
-							<div class="input-group-addon">
-								<i class="fa fa-clock-o"></i>
-							</div>
+						<div class="input-group-addon">
+							<i class="fa fa-clock-o"></i>
 						</div>
+						<input type="text" class="form-control pull-right" id="reservationtime">
+						</div>
+						<!-- /.input group -->
 					</div>
-             	</div>
-				 <div class="col-md-6">
+				</div>
+				<!--
+				<div class="col-md-3">
 					<div class="form-group">
-						<label>Date Time To Return Vehicle</label>
+						<label>Date To Take Vehicle</label>
 						<div class="input-group date">
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input type="text" class="form-control pull-right datepicker">
-						</div>
-						<div class="input-group">
-							<input type="text" class="form-control timepicker">
-							<div class="input-group-addon">
-								<i class="fa fa-clock-o"></i>
-							</div>
+							<input type="text" name="take_dt" id="startDate" class="form-control pull-right datepicker" required>
 						</div>
 					</div>
              	</div>
+				<div class="col-md-3">
+					<div class="bootstrap-timepicker">
+						<div class="form-group">
+						<label>Time To Book Vehicle</label>
+						<div class="input-group">
+							<input type="text" name="take_tm" class="form-control timepicker" required>
+							<div class="input-group-addon">
+							<i class="fa fa-clock-o"></i>
+							</div>
+						</div>
+						</div>
+					</div>
+              	</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Date To Return Vehicle</label>
+						<div class="input-group date">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<input type="text" name="retrun_dt" id="endDate" class="form-control pull-right datepicker" required>
+						</div>
+					</div>
+             	</div>
+				<div class="col-md-3">
+					<div class="bootstrap-timepicker">
+						<div class="form-group">
+						<label>Time To Return Vehicle</label>
+						<div class="input-group">
+							<input type="text" name="return_tm" class="form-control timepicker" required>
+							<div class="input-group-addon">
+							<i class="fa fa-clock-o"></i>
+							</div>
+						</div>
+						</div>
+					</div>
+				  </div>
+				  -->
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Address</label>
@@ -190,7 +211,7 @@ if(isset($_POST['update']))
 
 			</div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button"  id="save" class="btn btn-primary">Submit</button>
               </div>
             </form>
           	</div>
@@ -206,5 +227,76 @@ if(isset($_POST['update']))
 		</div>
 	</section>
 </div>
+<input type="hidden" class="bookdate">
 <?php include '../footer.php'; ?>
-	
+<script>
+	$(function(){
+		//Date range picker with time picker
+		$('#reservationtime').daterangepicker({
+			timePicker: true,
+			timePickerIncrement: 30,
+			format: 'MM/DD/YYYY h:mm A'
+		});
+
+
+		$(document).on('change','.vehicle_id',function(){
+			var vehicleId = $(this).val();
+			
+			window.vehicleId = vehicleId;
+			
+
+			$.ajax({
+				url:'../ajax/ajax.php',
+				type:'POST',
+				data:{vehicleId:vehicleId},
+				success:function(res){
+					$('.days').find('option').remove();
+					$('.days').append(res);
+				}
+			});
+			//console.log(vehicleId);
+		});
+		$(document).on('change','.days',function(){
+			var days = $(this).val();
+		});
+	// alert(new Date());
+	var bookdt = $('.bookdate').val();
+	$(document).on('change','#startDate',function(){
+		var c = $(this).val();
+		$('.bookdate').val(c);
+
+		$('#endDate').datepicker({
+			autoclose: true,
+			todayHighlight: true,
+			startDate: c,
+			minDate: 0
+		})
+
+	});
+		var jk = new Date('2020-09-25');
+		$('#startDate').datepicker({
+			autoclose: true,
+			todayHighlight: true,
+			startDate: new Date(),
+			multidate:false
+		})
+		
+		// submit form to database
+		$(document).on('click','#save',function(e){
+			var startDate = new Date($('#startDate').val());
+			var endDate = new Date($('#endDate').val());
+
+			console.log(startDate.getTime());
+			console.log(endDate.getTime());
+			// Error :- if Book date is greater and Return date is smaller..
+			// if (startDate > endDate){
+			// // // 	alert('Booking date is always smaller then return date.');
+			// }
+
+
+			// var form = $("#formSubmit").serialize();
+			// console.log(form);
+			
+		});
+	});
+</script>

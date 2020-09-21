@@ -1,5 +1,8 @@
 <?php include '../header.php'; ?>
 <?php
+
+
+
 if(isset($_POST['sub']))
 {
 	$vehicle_id = mysqli_real_escape_string($conn,$_POST['vehicle_id']);
@@ -11,11 +14,25 @@ if(isset($_POST['sub']))
 		$date->setTimezone($timezone);
 		$date_time = $date->format("M d, Y H:i:s"); 
 		$date = date('Y-m-d');
-	$bb = "INSERT INTO `g_setpayment`( `vehicle_id`, `days`, `howmanyhours`, `price`, `date_time`, `date`) VALUES ('$vehicle_id','$days','$howmanyhours','$price','$date_time','$date')";
-	mysqli_query($conn,$bb);
+
+	// checking vehicle is already days
+	$check = "SELECT * FROM `g_setpayment` WHERE `vehicle_id` = '$vehicle_id' AND `days` = '$days'";
+	$cv = mysqli_query($conn,$check);
+	$count = mysqli_num_rows($cv);
+
+	if($count > 0){
+		$dval = changeDays($days);
+		$msg = "You already assign $dval to these vechile.";
+		echo "<script>alert('$msg');</script>";
+	}else{
+
 	
-	echo "<script>alert('Payment set successfully!');</script>";
-	echo "<script>window.location.href='setpayment.php';</script>";
+		$bb = "INSERT INTO `g_setpayment`( `vehicle_id`, `days`, `howmanyhours`, `price`, `date_time`, `date`) VALUES ('$vehicle_id','$days','$howmanyhours','$price','$date_time','$date')";
+		mysqli_query($conn,$bb);
+		
+		echo "<script>alert('Payment set successfully!');</script>";
+		echo "<script>window.location.href='setpayment.php';</script>";
+	}			
 }
 if(isset($_POST['del'])){
 	$id = $_POST['del'];
@@ -152,7 +169,8 @@ if(isset($_POST['update']))
 						<h3 class="box-title"><b>Manage Set Payments</b></h3>
 					</div>
 					<div class="box-body box box-info">
-						<table class="table table-bordered">
+						<div class="table-responsive">
+						<table class="table table-bordered example1">
 							<thead>
 							  <tr>
 								<th>S.No.</th>
@@ -202,6 +220,7 @@ if(isset($_POST['update']))
 								}?>
 							</tbody>
 						</table>
+						</div>	
 					</div>	
 				</div>
 			</div>
